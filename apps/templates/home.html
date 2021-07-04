@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>ImageMart</title>
+  </head>
+
+  <body style="background-color: black;">
+   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <a class="navbar-brand" href="/">ImageMart</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Categories
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+           <a class="dropdown-item" href="/">All Images</a>
+            {% for a in cats %}
+          <a class="dropdown-item" href="/category/{{ a.pk }}">{{ a.title}}</a>
+
+              {% endfor %}
+        </div>
+      </li>
+
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+
+<!--   <div class="row">-->
+
+<!--       <div class="col-md-2">-->
+<!--&lt;!&ndash;           catagory&ndash;&gt;-->
+<!--           {% for i in image %}-->
+<!--           <h3>{{ i.title }}</h3>-->
+
+<!--           {% endfor %}-->
+<!--       </div>-->
+
+
+<!--       <div class="col-md-10">-->
+<!--<div class="container">-->
+<!--         image-->
+<!--        <div class="row row-cols-4 mt-3 ml-2">-->
+<!--            <div class="col-md-12">-->
+<!--                <div class="card-columns">-->
+
+<!--                           {% for i in image %}-->
+
+<!--                                  <div class="card" style="width: 18rem;">-->
+<!--                                    <img src="/media/{{i.image}}" class="card-img-top" alt="...">-->
+<!--                                    <div class="card-body">-->
+<!--                                      <h5 class="card-title">{{ i.title }}</h5>-->
+<!--                                      <p class="card-text">{{ i.desc }}</p>-->
+<!--                                      <a href="#" class="btn btn-primary">View</a>-->
+<!--                                    </div>-->
+<!--                                  </div>-->
+
+<!--                            {% endfor %}-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+<!--            </div>-->
+<!--        </div>-->
+<!--       </div>-->
+<!--</div>-->
+
+<!--   </div>-->
+
+<!--<div class="row">-->
+<!--&lt;!&ndash;     <div class="col-md-12">&ndash;&gt;-->
+<!--         <div class="card-columns">-->
+<!--                            {% for i in image %}-->
+
+
+
+
+<!--                               <div class="card" style="width: 18rem;">-->
+<!--                                  <img src="/media/{{i.image}}" class="card-img-top" alt="...">-->
+<!--                                  <div class="card-body">-->
+<!--    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+<!--  </div>-->
+<!--                                </div>-->
+<!--                            {% endfor %}-->
+<!--&lt;!&ndash;         </div>&ndash;&gt;-->
+<!--     </div>-->
+
+<!--</div>-->
+
+
+<!--.---------------------------------------------------------------------------------------->
+<div class="container-fluid" style="    margin-top: 70px;">
+
+    <div class="card-columns  " >
+         {% for i in image %}
+        <div class="card" style="background-color: black;">
+            <img class="card-img-top img-fluid" src="/media/{{i.image}}" alt="Card image cap">
+             <a  onclick="ShowModel('{{i.image}}')" class="btn btn-dark" style="margin-top: -90px;margin-left: 10px;color:white">View</a>
+
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="image_model" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">ImageMart</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <img src="#!" id="show_image" class="img-fluid">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+   <script>
+    function ShowModel(imageUrl)
+    {
+    $('#image_model').modal('show')
+    $('#show_image').attr('src',`/media/${imageUrl}`)
+    }
+
+</script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  </body>
+</html>
